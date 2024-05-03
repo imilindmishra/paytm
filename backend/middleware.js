@@ -2,7 +2,7 @@ const {JWT_SECRET} = require("./config");
 const jwt = require("jsonwebtoken");
 
 const authMiddleware = async(req,res, next) => {
-    const authHeader  = req.headers.authrization;
+    const authHeader  = req.headers.authorization;
 
     if( !authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(403).json({});
