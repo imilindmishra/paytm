@@ -96,7 +96,7 @@ router.put("/api/v1/user", authMiddleware, async(req,res) => {
             message: "Updated Successfully"
         })
     
-};
+});
     
 
 module.exports = router;
