@@ -97,6 +97,31 @@ router.put("/api/v1/user", authMiddleware, async(req,res) => {
         })
     
 });
+
+router.get("/bulk", async(req,res) => {
+    const filter = req.query.filter || "";
+
+    const users = await User.find({
+        $or: [{
+            firstName: {
+                "$regex": filter,
+            }
+        }, {
+            lastName: {
+                 "$regex": filter,
+            }
+    }]
+})
+
+res.json({
+    user: users.map(user => ({
+            firstName: user.firstName,
+            lastName: user.lastName,
+            username: user.username,
+            _id: user._id
+    }))
+    })
+})
     
 
 module.exports = router;
